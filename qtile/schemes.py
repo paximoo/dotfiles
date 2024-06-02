@@ -13,7 +13,12 @@ Catppuccino = [
     "#74c7ec",
     "#cba6f7",
     "#b4befe",
-    "#7f849c"
+    "#7f849c",
+    "#f9e2af",
+    "#94e2d5",
+    "#89b4fa",
+    "#cba6f7",
+    "#74c7ec"
 ]
 
 OneDark = [

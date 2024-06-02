@@ -3,6 +3,5 @@ configuration {
  font: "JetBrains Mono 15";
  combi-modi: "window,drun,ssh";
  }
-@theme "~/.config/rofi/themes/dt.rasi"
-
+@theme "~/.config/rofi/themes/mydocu.rasi"
 

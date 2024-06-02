@@ -67,11 +67,12 @@ def maximize_by_switching_layout(qtile):
 keys = [
     # The essentials
     Key([mod], "Return", lazy.spawn(myTerm), desc="Terminal"),
-    Key([mod], "space", lazy.spawn("rofi -show drun"), desc='Run Launcher'),
+    Key([mod], "space", lazy.spawn("rofi -show drun -drun-display-format {name}"), desc='Run Launcher'),
     Key([mod], "b", lazy.spawn(myBrowser), desc='Web browser'),
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod, "shift"], "c", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "shift"], "r", lazy.reload_config(), desc="Reload the config"),
+    Key([mod, "control"], "r", lazy.restart(), desc="Restart QTile"),
     Key([mod, "shift"], "q", lazy.spawn("dm-logout -r"), desc="Logout menu"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     
@@ -174,6 +175,12 @@ keys = [
         [],
         "XF86AudioMute",
         lazy.widget['volume'].mute()
+    ),
+    
+    Key(
+        [mod, "control"],
+        "l",
+        lazy.spawn("/home/pax/.config/qtile/lock.sh")
     ),
     
     # Emacs programs launched using the key chord CTRL+e followed by 'key'
@@ -350,9 +357,11 @@ def init_widgets_list():
             max_chars = 50,
             margin_x = 20,
             margin_y = 10,
-            fontsize = 20,
+            fontsize = 22,
             font = 'Cantarell Medium Italic',
         ),
+        # extWidget.WiFiIcon(),
+        # extWidget.PulseVolume(),
         # widget.TextBox(
         #     text = '🔌',
         #     font = 'JetBrains Mono',
@@ -361,9 +370,20 @@ def init_widgets_list():
         #     background = colors[8],
         #     fontsize = 30,
         # ),
+        widget.Wlan(
+            format = '🌐 {percent:2.0%}',
+            font = 'JetBrains Mono Medium',
+            fontsize = 24,
+            padding = 20,
+            foreground = colors[2],
+            background = colors[10],
+        ),
         widget.Battery(
-            format = '🗲 {percent:2.0%}',
-            font = 'JetBrains Mono NL Medium',
+            format = '⚡ {char}{percent:2.0%}',
+            notify_below = 20,
+            charge_char = '^',
+            discharge_char = '',
+            font = 'JetBrains Mono Medium',
             foreground = colors[2],
             fontsize = 24,
             padding = 20,
@@ -400,7 +420,7 @@ def init_widgets_list():
         # ),
         widget.Volume(
             fmt = '🔊 {}',
-            font = 'JetBrains Mono NL Medium',
+            font = 'JetBrains Mono',
             foreground = colors[2],
             fontsize = 24,
             padding = 20,
@@ -414,10 +434,6 @@ def init_widgets_list():
             format = "🕛 %H:%M",
             fontsize = 24,
             padding = 20,
-            decorations=[
-                RectDecoration(colour=colors[3], radius=13, filled=True, padding_y=0)
-                # BorderDecoration(colour=colors[4], padding = 20, aasdfasddfasdf=20)
-            ],
         ),
         widget.Clock(
             font = 'JetBrains Mono NL Medium',
@@ -426,10 +442,6 @@ def init_widgets_list():
             format = "🗓 %a, %b %d",
             fontsize = 24,
             padding = 20,
-            decorations=[
-                RectDecoration(colour=colors[3], radius=13, filled=True, padding_y=0)
-                # BorderDecoration(colour=colors[4], padding = 20, aasdfasddfasdf=20)
-            ],
         ),
     ]
     return widgets_list
@@ -537,7 +549,6 @@ wl_input_rules = None
 # Startup
 @hook.subscribe.startup_once
 def start_once():
-    send_notification("qtile", "asfd")
     home = os.path.expanduser('~')
     subprocess.call([home + '/.config/qtile/autostart.sh'])
 
