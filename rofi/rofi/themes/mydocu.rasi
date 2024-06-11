@@ -1,0 +1,138 @@
+/**
+ * ROFI Documentation theme.
+ * User: Qball
+ * Copyright: Dave Davenport
+ */
+
+/** Default settings, every widget inherits from this. */
+* {
+    /** Default background color is transparent. */
+    background-color: transparent;
+    /** Default text is white */
+    text-color:       #cdd6f4;
+    font: "Cantarell Medium 18";
+}
+
+/**
+ * Entry box on top. 
+ */
+entry {
+    /** Background is grey */
+    background-color: #18182500;
+    /** 4px padding on the inside of the border. */
+    padding:       4px;
+    /** when no text is set, show 'Type to filter' */
+    placeholder:       "Search";
+    /** this text is dark grey */
+    placeholder-color: #9399b2;
+    /** inherit font setting from parent */
+    font: inherit;
+    cursor: text;
+}
+
+/**
+ * Input bar
+ */
+inputbar {
+    /** no spacing between widgets */
+    spacing: 0;
+    /** include entry and mode-switcher (removes prompt) */
+    children: [  entry ];
+    /** use monospace font. */
+    font:   "mono 20";
+}
+
+
+/**
+ * Small icon in inputbar
+ */
+icon-keyboard {
+    /** give it a 2 pixel border, except on the right side. */
+    /** border:        2px 0px 2px 2px; */
+    /** with a radius on the left two corners. */ 
+    border-radius: 4px 0px 0px 4px;
+    /** add matching border. */
+    border-color: darkgrey;
+    /** match background. */
+    /** background-color: grey; */
+    /** move icon away from right border. */
+    padding: 0px 10px 0px 10px;
+    /** Only use required space. */
+    expand: false;
+    /** icon is around 1.2 font width */
+    size: 0.1em;
+    /** Icon name, we use symbolic name here */
+    filename: "keyboard";
+}
+
+/**
+ * Main window widget
+ */
+window {
+    /** Place on top center of rofi window on the top center of the screen. */
+    anchor: south;
+    location: center;
+
+    /** 100% screen width */
+    width:            45%;
+
+    /** Black transparent color. */
+    background-color: #13191c;
+    /** Small one 1 font width border on inside of window. */
+    padding:           2em;
+
+}
+
+/**
+ * Main container in the window.
+ */
+mainbox { 
+    /** spacing between widgets */
+    spacing: 1.3em;
+}
+
+/**
+ * listview that shows entries.
+ */
+listview {
+    /** 4 rows. */
+    lines: 4;
+    /** 6 columns */
+    columns: 4;
+    /** add 1 em spacing between items */
+    spacing: 1em;
+    /** Don't reduce columns if less items are available. */
+    fixed-columns: false;
+}
+/**
+ * entry in listview.
+ */
+element {
+    /** clients are packed vertically. */
+    orientation:      vertical;
+    background-color: #18182500;
+    /** 4 px padding on the inside of border */
+    cursor: pointer;
+    padding:          20px 0px 20px 0px;
+font: "JetBrains Mono 26";
+}
+
+/** selected element */
+element selected {
+    /** highlighted colors */
+    background-color: #313244;
+}
+
+/** Entry icon */
+element-icon {
+    /** change size to 128 pixels. */
+    size: 128px;
+    cursor: inherit;
+}
+
+/** Entry text */
+element-text {
+    /* align font in (horizontally) center */
+    horizontal-align: 0.5;
+    cursor: inherit;
+}
